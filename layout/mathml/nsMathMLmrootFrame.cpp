@@ -3,6 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+#include <stdio.h>
 #include "nsMathMLmrootFrame.h"
 #include "nsPresContext.h"
 #include "nsRenderingContext.h"
@@ -244,8 +245,10 @@ nsMathMLmrootFrame::Reflow(nsPresContext*          aPresContext,
 
   // make sure that the rule appears on on screen
   nscoord onePixel = nsPresContext::CSSPixelsToAppUnits(1);
+  printf("onePixel = %f", onePixel);
   if (ruleThickness < onePixel) {
     ruleThickness = onePixel;
+    printf("ruleThickness = %f", ruleThickness);
   }
 
   // adjust clearance psi to get an exact number of pixels -- this
