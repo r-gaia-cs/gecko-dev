@@ -23,6 +23,7 @@ static const char16_t kSqrChar = char16_t(0x221A);
 nsIFrame*
 NS_NewMathMLmrootFrame(nsIPresShell* aPresShell, nsStyleContext* aContext)
 {
+  printf("NS_NewMathMLmrootFrame\n");
   return new (aPresShell) nsMathMLmrootFrame(aContext);
 }
 
@@ -44,6 +45,7 @@ nsMathMLmrootFrame::Init(nsIContent*       aContent,
                          nsContainerFrame* aParent,
                          nsIFrame*         aPrevInFlow)
 {
+  printf("Init\n");
   nsMathMLContainerFrame::Init(aContent, aParent, aPrevInFlow);
   
   nsPresContext *presContext = PresContext();
@@ -59,6 +61,7 @@ nsMathMLmrootFrame::Init(nsIContent*       aContent,
 NS_IMETHODIMP
 nsMathMLmrootFrame::TransmitAutomaticData()
 {
+  printf("TransmitAutomaticData\n");
   // 1. The REC says:
   //    The <mroot> element increments scriptlevel by 2, and sets displaystyle to
   //    "false", within index, but leaves both attributes unchanged within base.
@@ -80,6 +83,7 @@ nsMathMLmrootFrame::BuildDisplayList(nsDisplayListBuilder*   aBuilder,
                                      const nsRect&           aDirtyRect,
                                      const nsDisplayListSet& aLists)
 {
+  printf("BuildDisplayList\n");
   /////////////
   // paint the content we are square-rooting
   nsMathMLContainerFrame::BuildDisplayList(aBuilder, aDirtyRect, aLists);
@@ -108,6 +112,7 @@ nsMathMLmrootFrame::GetRadicalXOffsets(nscoord aIndexWidth, nscoord aSqrWidth,
                                        nscoord* aIndexOffset,
                                        nscoord* aSqrOffset)
 {
+  printf("GetRadicalXOffsets\n");
   // The index is tucked in closer to the radical while making sure
   // that the kern does not make the index and radical collide
   nscoord dxIndex, dxSqr;
@@ -165,6 +170,7 @@ nsMathMLmrootFrame::Reflow(nsPresContext*          aPresContext,
                            const nsHTMLReflowState& aReflowState,
                            nsReflowStatus&          aStatus)
 {
+  printf("Reflow\n");
   MarkInReflow();
   nsReflowStatus childStatus;
 
@@ -364,6 +370,7 @@ nsMathMLmrootFrame::Reflow(nsPresContext*          aPresContext,
 /* virtual */ void
 nsMathMLmrootFrame::GetIntrinsicISizeMetrics(nsRenderingContext* aRenderingContext, nsHTMLReflowMetrics& aDesiredSize)
 {
+  printf("GetIntrinsicISizeMetrics\n");
   nsIFrame* baseFrame = mFrames.FirstChild();
   nsIFrame* indexFrame = nullptr;
   if (baseFrame)
@@ -402,6 +409,7 @@ nsMathMLmrootFrame::GetIntrinsicISizeMetrics(nsRenderingContext* aRenderingConte
 nsStyleContext*
 nsMathMLmrootFrame::GetAdditionalStyleContext(int32_t aIndex) const
 {
+  printf("GetAdditionalStyleContext\n");
   switch (aIndex) {
   case NS_SQR_CHAR_STYLE_CONTEXT_INDEX:
     return mSqrChar.GetStyleContext();
@@ -415,6 +423,7 @@ void
 nsMathMLmrootFrame::SetAdditionalStyleContext(int32_t          aIndex, 
                                               nsStyleContext*  aStyleContext)
 {
+  printf("SetAdditionalStyleContext\n");
   switch (aIndex) {
   case NS_SQR_CHAR_STYLE_CONTEXT_INDEX:
     mSqrChar.SetStyleContext(aStyleContext);
